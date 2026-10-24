@@ -1,0 +1,10 @@
+{
+  "name": "sniffpup-scan-action",
+  "version": "1.0.0",
+  "private": true,
+  "description": "GitHub Action: run SniffPup's free passive security scan on your deployed app.",
+  "license": "MIT",
+  "main": "src/index.js",
+  "scripts": { "test": "node --test test/" },
+  "engines": { "node": ">=20" }
+}

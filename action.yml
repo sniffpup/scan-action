@@ -1,0 +1,46 @@
+name: "SniffPup Scan"
+description: "Run SniffPup's free passive security scan on your deployed app and print the score and what it found."
+author: "SniffPup"
+branding:
+  icon: "shield"
+  color: "orange"
+inputs:
+  url:
+    description: "Public URL of the deployed site to scan, e.g. https://my-app.lovable.app. Only scan sites you own or are authorized to test."
+    required: true
+  consent:
+    description: >
+      Must be "true". Confirms you own this site or have permission to test it, and that you agree to SniffPup's
+      Terms (https://sniffpup.com/legal/terms) and Acceptable Use Policy (https://sniffpup.com/legal/acceptable-use).
+      The scan is refused without it.
+    required: true
+  threshold:
+    description: "Fail the job if the score is below this number (0-100). 0 (default) never fails on score."
+    required: false
+    default: "0"
+  fail-on-scan-error:
+    description: "Fail the job if the scan can't run (site unreachable, rate limited, blocked). Default false: a warning only."
+    required: false
+    default: "false"
+  api-base:
+    description: "SniffPup base URL. Leave the default."
+    required: false
+    default: "https://sniffpup.com"
+  timeout-seconds:
+    description: "How long to wait for the scan response."
+    required: false
+    default: "90"
+outputs:
+  score:
+    description: "The Sniff score (0-100), empty if the scan didn't run."
+  report-url:
+    description: "Link to the full report on sniffpup.com."
+  critical:
+    description: "Number of critical findings."
+  high:
+    description: "Number of high findings."
+  passed:
+    description: "\"true\" if the score met the threshold."
+runs:
+  using: "node20"
+  main: "src/index.js"

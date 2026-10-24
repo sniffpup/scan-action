@@ -1,0 +1,28 @@
+# .github/workflows/sniffpup.yml
+# Scan your live app with SniffPup after each deploy to main.
+name: SniffPup scan
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  sniffpup:
+    runs-on: ubuntu-latest
+    steps:
+      # If your host deploys on push (Vercel, Netlify, Lovable, Replit...), give it a moment to go live,
+      # or trigger this workflow from your deploy instead (e.g. on: deployment_status).
+      - name: Wait for the deploy
+        run: sleep 60
+      - name: SniffPup scan
+        id: sniff
+        uses: sniffpup/scan-action@v1
+        with:
+          url: https://my-app.example.com
+          # You own this site or are authorized to test it, and agree to SniffPup's Terms and Acceptable Use Policy.
+          consent: "true"
+          # Fail the job if the score drops below 80. Use 0 to never fail on score.
+          threshold: "80"
+      - name: Show the report link
+        if: always()
+        run: echo "SniffPup score ${{ steps.sniff.outputs.score }} - ${{ steps.sniff.outputs.report-url }}"
