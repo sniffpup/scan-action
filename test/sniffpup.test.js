@@ -33,14 +33,14 @@ test("parseInputs requires a URL and explicit consent", () => {
   assert.equal(o.failOnScanError, false);
 });
 
-test("calls only POST /api/scan with url + consent, nothing else", async () => {
+test("calls only POST /api/scan with url + consent + UTM tags, nothing else", async () => {
   let seen;
   const fake = async (u, init) => { seen = { u, init }; return { ok: true, status: 200, json: async () => sample }; };
   const r = await runScan({ url: "https://my-app.example.dev", base: "https://sniffpup.com", timeoutMs: 5000 }, fake);
   assert.equal(r.ok, true);
   assert.equal(seen.u, "https://sniffpup.com/api/scan");
   assert.equal(seen.init.method, "POST");
-  assert.deepEqual(JSON.parse(seen.init.body), { url: "https://my-app.example.dev", consent: "true" });
+  assert.deepEqual(JSON.parse(seen.init.body), { url: "https://my-app.example.dev", consent: "true", utm_source: "github-action", utm_medium: "ci", utm_campaign: "github-action" });
   assert.ok(!("authorization" in seen.init.headers));
 });
 

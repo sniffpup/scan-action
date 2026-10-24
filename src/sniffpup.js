@@ -2,7 +2,7 @@
 /**
  * Pure helpers for the SniffPup GitHub Action. No dependencies.
  * Uses only SniffPup's existing public free-scan endpoint: POST {api-base}/api/scan
- * with JSON { url, consent: "true" }. Same rules and limits as a scan from the website.
+ * with JSON { url, consent: "true", utm_* tags }. Same rules and limits as a scan from the website.
  */
 
 const UTM = "utm_source=github-action&utm_medium=ci&utm_campaign=github-action";
@@ -41,7 +41,8 @@ async function runScan({ url, base, timeoutMs }, fetchImpl = fetch) {
     const res = await fetchImpl(`${base}/api/scan`, {
       method: "POST",
       headers: { "content-type": "application/json", accept: "application/json", "user-agent": "sniffpup-github-action/1.0" },
-      body: JSON.stringify({ url, consent: "true" }),
+      // UTM tags let SniffPup count scans from this Action (existing source tracking; no personal data).
+      body: JSON.stringify({ url, consent: "true", utm_source: "github-action", utm_medium: "ci", utm_campaign: "github-action" }),
       signal: ctrl.signal,
     });
     let body = null;
