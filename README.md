@@ -1,5 +1,7 @@
 # SniffPup Scan (GitHub Action)
 
+[![Scan with SniffPup](https://img.shields.io/badge/Scan%20with-SniffPup-1d4ed8)](https://sniffpup.com/?utm_source=github-action&utm_medium=readme-badge&utm_campaign=github-action)
+
 Run [SniffPup](https://sniffpup.com/?utm_source=github-action&utm_medium=readme&utm_campaign=github-action)'s free, passive security scan on your **deployed** app from a GitHub workflow. It prints your Sniff score and the titles of what it found, links to the full report, and can fail the build when the score drops below a threshold you choose.
 
 Built for vibe-coded apps (Lovable, Bolt, Cursor, Replit, v0) and any public website.
@@ -20,6 +22,15 @@ Built for vibe-coded apps (Lovable, Bolt, Cursor, Replit, v0) and any public web
     threshold: "80"   # optional: fail below 80 (default 0 = never fail on score)
 ```
 See [`examples/workflow.yml`](examples/workflow.yml) for a full workflow.
+
+### Add a "Scan with SniffPup" badge to your README
+Paste this into your own README so visitors and contributors can run the same free scan:
+
+```markdown
+[![Scan with SniffPup](https://img.shields.io/badge/Scan%20with-SniffPup-1d4ed8)](https://sniffpup.com/?utm_source=github&utm_medium=readme-badge&utm_campaign=scan-badge)
+```
+
+The badge is a plain link to SniffPup's free scan page. It doesn't show a score and isn't a certification, audit or guarantee: a passing scan, even a score of 100, means no issues were found in SniffPup's checks, not proof that an app is secure.
 
 ### Inputs
 | Input | Required | Default | What it does |
