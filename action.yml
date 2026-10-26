@@ -42,5 +42,5 @@ outputs:
   passed:
     description: "\"true\" if the score met the threshold."
 runs:
-  using: "node20"
+  using: "node24"
   main: "src/index.js"

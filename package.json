@@ -6,5 +6,5 @@
   "license": "MIT",
   "main": "src/index.js",
   "scripts": { "test": "node --test test/" },
-  "engines": { "node": ">=20" }
+  "engines": { "node": ">=24" }
 }

@@ -130,9 +130,9 @@ test("end to end against a local fake SniffPup: passes, fails below threshold, w
   }
 });
 
-test("action.yml points at src/index.js on node20 and declares the inputs", () => {
+test("action.yml points at src/index.js on node24 and declares the inputs", () => {
   const y = fs.readFileSync(path.join(__dirname, "..", "action.yml"), "utf8");
-  assert.match(y, /using: "node20"/);
+  assert.match(y, /using: "node24"/);
   assert.match(y, /main: "src\/index.js"/);
   for (const k of ["url:", "consent:", "threshold:", "fail-on-scan-error:", "api-base:"]) assert.ok(y.includes(k), k);
 });

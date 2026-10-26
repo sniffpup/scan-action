@@ -29,7 +29,23 @@ Passive and read-only: no logins, no form submissions, no attacks. Only scan sit
 
 **Tags/keywords:** security, scanner, secrets, vibe coding, lovable, supabase, ci
 
-## Before publishing (needs the user's decision)
-1. Create a public GitHub repo (e.g. `sniffpup/scan-action`; the `uses:` lines above assume that name). Marketplace requires the action at the repo root and a unique action name.
-2. Accept the GitHub Marketplace Developer Agreement with the account that owns the repo (2FA required).
-3. Tag `v1.0.0` and move a `v1` tag, then "Draft a release" → "Publish this Action to the GitHub Marketplace".
+## Readiness (checked Oct 26, 2026)
+- action.yml at repo root, only one action metadata file: OK.
+- Name "SniffPup Scan": not taken on GitHub Marketplace, not a GitHub user/org name, not a category: OK.
+- branding: icon `shield`, color `orange` (allowed values; orange is the closest to our amber): OK.
+- runs.using `node24` (GitHub removed Node 20 from runners on Sep 23, 2026; node20 actions would fail): FIXED.
+- No dependencies to bundle (only node: built-ins), so no dist/ build step: OK.
+- README with usage, inputs, outputs, limits, consent: OK. LICENSE (MIT): OK.
+- Tests: 7/7 on Node 20 and Node 24. CI workflow uses checkout@v5 / setup-node@v5 on Node 24.
+- Local tags v1.0.0 and v1 point at the release commit (not pushed).
+
+## Steps for Ember and Saru (needs the @sniffpup GitHub login and 2FA)
+1. Sign in to GitHub as @sniffpup. Make sure two-factor authentication is on (Settings → Password and authentication); publishing to Marketplace requires it.
+2. Create a new **public** repository named `scan-action` under @sniffpup (no README, no license, no .gitignore, so it starts empty).
+3. Tell me it exists and I push the local repo: `git remote add origin https://github.com/sniffpup/scan-action.git && git push -u origin main && git push origin v1.0.0 v1` (or run that yourself from this folder).
+4. On github.com/sniffpup/scan-action, open `action.yml` and click **Draft a release** in the banner.
+5. Tick **Publish this Action to the GitHub Marketplace**. If it's greyed out, click the link to accept the **GitHub Marketplace Developer Agreement**, accept it, and come back.
+6. Wait for "Everything looks good!". Primary category: **Security**. Second category: **Continuous integration**.
+7. Choose the existing tag **v1.0.0**. Title: `v1.0.0`. Notes: the short description above.
+8. Click **Publish release** and confirm with your 2FA code.
+9. Later releases: tag `v1.x.y`, then move `v1` to it (`git tag -f v1 && git push -f origin v1`) so `@v1` users get the update.
