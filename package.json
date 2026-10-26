@@ -5,6 +5,6 @@
   "description": "GitHub Action: run SniffPup's free passive security scan on your deployed app.",
   "license": "MIT",
   "main": "src/index.js",
-  "scripts": { "test": "node --test test/" },
+  "scripts": { "test": "node --test test/*.test.js" },
   "engines": { "node": ">=24" }
 }
